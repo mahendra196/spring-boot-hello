@@ -1,38 +1,41 @@
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    name: my-springboot-deployment
-  spec:
-    replicas: 3
-    selector:
-      matchLabels:
-        app: hello-world
-    template:
-      metadata:
-        labels:
-          app: hello-world
-      spec:
-        containers:
-          - name: my-springboot-app
-            image: mahendraccr.azurecr.io/mahendra196/spring-boot-hello:#{Build.BuildId}#
-            imagePullPolicy: Always
-            ports:
-              - containerPort: 8085
-  # service type loadbalancer
 ---
-  apiVersion: v1
-  kind: Service
-  metadata:
-    labels:
-      app: springboot-app
-      k8s-app: hello-world
-    name: hello-world
-  spec:
-    ports:
-      - name: http
-        port: 80
-        protocol: TCP
-        targetPort: 8085
-    type: LoadBalancer
-    selector:
-      app: springboot-app
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-springboot-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+        -
+          image: "mahendraccr.azurecr.io/mahendra196/spring-boot-hello:#{Build.BuildId}#"
+          imagePullPolicy: Always
+          name: my-springboot-app
+          ports:
+            -
+              containerPort: 8085
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: springboot-app
+    k8s-app: hello-world
+  name: hello-world
+spec:
+  ports:
+    -
+      name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8085
+  selector:
+    app: springboot-app
+  type: LoadBalancer
