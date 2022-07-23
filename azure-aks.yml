@@ -19,7 +19,7 @@
             ports:
               - containerPort: 8085
   # service type loadbalancer
-  ---
+---
   apiVersion: v1
   kind: Service
   metadata:
