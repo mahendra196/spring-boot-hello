@@ -18,7 +18,7 @@ spec:
           image: mahendraccr.azurecr.io/mahendra196/spring-boot-hello:#{Build.BuildId}#
           imagePullPolicy: Always
           ports:
-            - containerPort: 8085
+            - containerPort: 8080
 # service type loadbalancer
 ---
 apiVersion: v1
@@ -33,7 +33,7 @@ spec:
     - name: http
       port: 80
       protocol: TCP
-      targetPort: 8085
+      targetPort: 8080
   type: LoadBalancer
   selector:
     app: hello-world
