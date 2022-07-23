@@ -16,7 +16,7 @@ spec:
       containers:
         - name: hello-world
           image: mahendraccr.azurecr.io/mahendra196/spring-boot-hello:#{Build.BuildId}#
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           ports:
             - containerPort: 8085
 # service type loadbalancer
